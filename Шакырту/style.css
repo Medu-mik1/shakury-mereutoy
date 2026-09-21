@@ -1,0 +1,518 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle, #163827 0%, #08150f 100%);
+    font-family: 'Montserrat', sans-serif;
+    color: #f5f5f5;
+    min-height: 100vh;
+    padding: 15px;
+    overflow-x: hidden;
+}
+
+/* Фейерверк Canvas */
+#fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.container {
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(14, 32, 23, 0.96);
+    border: 2px solid #d4af37;
+    border-radius: 25px;
+    padding: 25px 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+
+/* Навигациялық меню (Табырлар) */
+.page-nav {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(5, 15, 10, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 15px;
+    padding: 5px;
+    margin-bottom: 25px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-btn.active {
+    background: #d4af37;
+    color: #0e2017;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+/* Бет контенттері */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Музыкалық виджет */
+.audio-widget {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: rgba(14, 32, 23, 0.9);
+    border: 1.5px solid #d4af37;
+    padding: 6px 12px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    transition: 0.3s;
+}
+
+.audio-widget:hover {
+    transform: scale(1.05);
+}
+
+.vinyl {
+    font-size: 18px;
+    animation: rotateVinyl 4s linear infinite paused;
+}
+
+.vinyl.playing {
+    animation-play-state: running;
+}
+
+@keyframes rotateVinyl {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.audio-info span {
+    font-size: 10px;
+    color: #d4af37;
+    font-weight: 600;
+}
+
+.sound-waves {
+    display: flex;
+    gap: 2px;
+    height: 10px;
+    align-items: flex-end;
+}
+
+.sound-waves span {
+    width: 2px;
+    background: #d4af37;
+    height: 3px;
+    animation: waveAnim 1s ease-in-out infinite alternate paused;
+}
+
+.sound-waves span:nth-child(2) { animation-delay: 0.2s; }
+.sound-waves span:nth-child(3) { animation-delay: 0.4s; }
+.sound-waves span:nth-child(4) { animation-delay: 0.6s; }
+
+.audio-widget.active .sound-waves span {
+    animation-play-state: running;
+}
+
+@keyframes waveAnim {
+    from { height: 3px; }
+    to { height: 12px; }
+}
+
+/* Басты экран (Hero) */
+.hero {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.subtitle {
+    font-size: 12px;
+    color: #d4af37;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    margin: 10px 0;
+    color: #ffffff;
+}
+
+.photo-container {
+    width: 160px;
+    height: 160px;
+    margin: 15px auto;
+    border-radius: 50%;
+    border: 3px solid #d4af37;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.age-badge {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #d4af37;
+    margin: 5px 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.event-title {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #cccccc;
+}
+
+/* Күні мен уақыты */
+.info-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 12px 0;
+    text-align: center;
+}
+
+.info-box h3 {
+    font-size: 12px;
+    color: #d4af37;
+    margin-bottom: 4px;
+}
+
+.info-box p {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Таймер */
+.countdown-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.countdown-section h3 {
+    font-size: 13px;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
+.timer-grid {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.time-box {
+    background: rgba(5, 15, 10, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 10px;
+    padding: 8px 10px;
+    min-width: 50px;
+}
+
+.time-box span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d4af37;
+}
+
+.time-box p {
+    font-size: 9px;
+    color: #aaa;
+}
+
+/* RSVP (Қатысу) */
+.rsvp-section {
+    text-align: center;
+    background: rgba(0,0,0,0.25);
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.rsvp-section h3 {
+    font-size: 13px;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
+.rsvp-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rsvp-btn {
+    padding: 9px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+.rsvp-btn.yes { background: #2e7d32; color: white; }
+.rsvp-btn.no { background: #c62828; color: white; }
+.rsvp-btn:hover { opacity: 0.85; transform: scale(1.02); }
+
+.rsvp-msg {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #f3c653;
+}
+
+/* Фотогалерея слайдер */
+.gallery-section {
+    text-align: center;
+}
+
+.gallery-section h2, .location-page h2, .wishes-page h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #d4af37;
+    margin-bottom: 5px;
+}
+
+.section-desc {
+    font-size: 11px;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #d4af37;
+    background: #000;
+}
+
+.slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 12px;
+    padding: 8px;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(212, 175, 55, 0.8);
+    border: none;
+    color: #0e2017;
+    font-size: 16px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.slider-btn.prev { left: 10px; }
+.slider-btn.next { right: 10px; }
+.slider-btn:hover { background: #f3c653; }
+
+/* Мекенжай бөлімі */
+.location-page {
+    text-align: center;
+}
+
+.location-card {
+    background: rgba(5, 15, 10, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 15px;
+    padding: 25px 15px;
+    margin-top: 15px;
+}
+
+.loc-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.location-card h3 {
+    font-size: 16px;
+    color: #d4af37;
+    margin-bottom: 5px;
+}
+
+.restaurant-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.loc-desc {
+    font-size: 12px;
+    color: #bbb;
+    margin-bottom: 15px;
+}
+
+.map-action-btn {
+    display: inline-block;
+    background: #d4af37;
+    color: #0e2017;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.map-action-btn:hover { background: #f3c653; transform: scale(1.05); }
+
+/* Тілектер қабырғасы */
+.wishes-page {
+    text-align: center;
+}
+
+.wish-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.wish-form input, .wish-form textarea {
+    width: 100%;
+    background: rgba(5, 15, 10, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 10px;
+    padding: 10px;
+    color: #fff;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.wish-form textarea {
+    height: 70px;
+    resize: none;
+}
+
+.submit-wish-btn {
+    background: #d4af37;
+    color: #0e2017;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-wish-btn:hover { background: #f3c653; }
+
+.wishes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 220px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.wish-item {
+    background: rgba(5, 15, 10, 0.7);
+    border-left: 3px solid #d4af37;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.wish-item strong {
+    font-size: 11px;
+    color: #d4af37;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.wish-item p {
+    font-size: 12px;
+    color: #ddd;
+}
+
+/* Футер */
+.footer {
+    text-align: center;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    padding-top: 15px;
+    margin-top: 20px;
+}
+
+.footer p {
+    font-size: 11px;
+    color: #aaaaaa;
+    margin-bottom: 4px;
+}
+
+.wish-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #d4af37;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разима ананың 70 жас мерейтойы</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Фейерверк үшін Canvas -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Фондық музыка плеері -->
+    <div class="audio-widget" id="audioWidget">
+        <div class="vinyl" id="vinyl">💿</div>
+        <div class="audio-info">
+            <span id="audioStatus">Әнді тыңдау</span>
+            <div class="sound-waves">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+    <audio id="bgMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="container">
+        
+        <!-- Навигациялық меню -->
+        <nav class="page-nav">
+            <button class="nav-btn active" onclick="switchTab('tab-invitation', event)">Шақыру</button>
+            <button class="nav-btn" onclick="switchTab('tab-gallery', event)">Галерея</button>
+            <button class="nav-btn" onclick="switchTab('tab-location', event)">Орын</button>
+            <button class="nav-btn" onclick="switchTab('tab-wishes', event)">Тілектер</button>
+        </nav>
+
+        <!-- 1-БЕТ: ШАҚЫРУ -->
+        <div id="tab-invitation" class="tab-content active">
+            <section class="hero" data-aos="fade-down" data-aos-duration="1200">
+                <div class="ornament-top"></div>
+                <span class="subtitle">Құрметті ағайын-туыс, құда-жекжат, достар!</span>
+                <h1>Рахима анамыздың</h1>
+                
+                <div class="photo-container" data-aos="zoom-in" data-aos-duration="1000">
+                    <!-- photo1 суреті (imges папкасынан) -->
+                    <img src="imges/photo1.jpeg" alt="Рахима ана" onerror="this.onerror=null; this.src='imges/photo1.JPG';">
+                    <div class="photo-glow"></div>
+                </div>
+
+                <div class="age-badge" data-aos="flip-up">70 ЖАС</div>
+                <p class="event-title">Мерейтой салтанатына арналған ақ дастарханымыздың қадірлі қонағы болуға салтанатпен шақырамыз!</p>
+                <div class="ornament-bottom"></div>
+            </section>
+
+            <section class="info-section" data-aos="fade-up">
+                <div class="info-box">
+                    <h3>📅 Күні</h3>
+                    <p>17 қазан 2026 жыл</p>
+                </div>
+                <div class="info-box">
+                    <h3>⏰ Уақыты</h3>
+                    <p>Сағат 18:00-де</p>
+                </div>
+            </section>
+
+            <section class="countdown-section" data-aos="zoom-in">
+                <h3>Мерейтойға қалған уақыт:</h3>
+                <div class="timer-grid">
+                    <div class="time-box"><span id="days">00</span><p>Күн</p></div>
+                    <div class="time-box"><span id="hours">00</span><p>Сағат</p></div>
+                    <div class="time-box"><span id="minutes">00</span><p>Минут</p></div>
+                    <div class="time-box"><span id="seconds">00</span><p>Секунд</p></div>
+                </div>
+            </section>
+
+            <section class="rsvp-section" data-aos="fade-up">
+                <h3>Тойға келесіз бе?</h3>
+                <div class="rsvp-buttons">
+                    <button onclick="handleRsvp('yes')" class="rsvp-btn yes">Міндетті түрде келемін! 🎉</button>
+                    <button onclick="handleRsvp('no')" class="rsvp-btn no">Өкінішке орай, келе алмаймын 😔</button>
+                </div>
+                <p id="rsvpMessage" class="rsvp-msg"></p>
+            </section>
+        </div>
+
+        <!-- 2-БЕТ: ФОТОГАЛЕРИЯ -->
+        <div id="tab-gallery" class="tab-content">
+            <section class="gallery-section">
+                <h2>Жылы естеліктер</h2>
+                <p class="section-desc">Анамыздың өмір жолы мен шуақты күндері</p>
+                
+                <div class="slider-container">
+                    <div class="slide active">
+                        <img src="imges/photo2.jpeg" alt="Естелік 2" onerror="this.onerror=null; this.src='imges/photo2.JPG';">
+                        <p class="slide-caption">Анамыздың мейірлі жүзі</p>
+                    </div>
+                    <div class="slide">
+                        <img src="imges/photo3.jpeg" alt="Естелік 22" onerror="this.onerror=null; this.src='imges/photo22.JPG';">
+                        <p class="slide-caption">Отбасылық береке</p>
+                    </div>
+                    <div class="slide">
+                        <img src="imges/photo3.jpeg" alt="Естелік 3" onerror="this.onerror=null; this.src='imges/photo3.JPG';">
+                        <p class="slide-caption">Шуақты күндер</p>
+                    </div>
+                    <div class="slide">
+                        <img src="imges/photo4.jpeg" alt="Естелік 4" onerror="this.onerror=null; this.src='imges/photo4.JPG';">
+                        <p class="slide-caption">Немерелер қуанышы</p>
+                    </div>
+                    <div class="slide">
+                        <img src="imges/photo5.jpeg" alt="Естелік 5" onerror="this.onerror=null; this.src='imges/photo5.JPG';">
+                        <p class="slide-caption">Асыл анамыз</p>
+                    </div>
+                    
+                    <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
+                    <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- 3-БЕТ: МЕКЕНЖАЙ -->
+        <div id="tab-location" class="tab-content">
+            <section class="location-page">
+                <h2>Мейрамхана мекенжайы</h2>
+                <div class="location-card">
+                    <div class="loc-icon">📍</div>
+                    <h3>Қаратау қаласы</h3>
+                    <p class="restaurant-name">«Құдаша» мейрамханасы</p>
+                    <p class="loc-desc">Салтанатты сарайдың үлкен залы сіздерді асыға күтеді.</p>
+                    <a href="https://2gis.kz" target="_blank" class="map-action-btn">2GIS картасынан ашу</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- 4-БЕТ: ТІЛЕКТЕР -->
+        <div id="tab-wishes" class="tab-content">
+            <section class="wishes-page">
+                <h2>Ақ тілектер қабырғасы</h2>
+                <p class="section-desc">Анамызға өз жүрекжарды тілегіңізді жазып қалдырыңыз</p>
+
+                <div class="wish-form">
+                    <input type="text" id="guestName" placeholder="Аты-жөніңіз...">
+                    <textarea id="guestWish" placeholder="Жылы лебізіңіз бен тілегіңіз..."></textarea>
+                    <button onclick="submitWish()" class="submit-wish-btn">Тілек жолдау</button>
+                </div>
+
+                <div class="wishes-list" id="wishesList">
+                    <div class="wish-item">
+                        <strong>Нұрлан мен Айгүл:</strong>
+                        <p>Жүз жасаңыз, асыл анамыз! Деніңіз сау болсын!</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <p>Той иелері: Жолдасы, балалары және немерелері</p>
+            <div class="wish-quote">«Анамыз аман болсын!»</div>
+        </footer>
+
+    </div>
+
+    <!-- JS кітапханалары -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
